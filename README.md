@@ -1,4 +1,4 @@
-# ✈️ Flight Data Warehouse
+#  Flight Data Warehouse
 
 A Data Warehouse project built with Django and PostgreSQL featuring OLAP queries on real flight data.
 
