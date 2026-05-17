@@ -21,3 +21,4 @@ airports.csv
 
 # VS Code
 .vscode/
+.env
