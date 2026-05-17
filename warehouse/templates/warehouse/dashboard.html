@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Data Warehouse</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+        h1 { color: #333; }
+        h2 { color: #555; margin-top: 30px; }
+        table { border-collapse: collapse; width: 100%; background: white; margin-bottom: 20px; }
+        th { background: #4a90d9; color: white; padding: 10px; }
+        td { padding: 8px 10px; border-bottom: 1px solid #ddd; }
+        tr:hover { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+
+<h1>✈️ Flight Data Warehouse — OLAP Dashboard</h1>
+
+<h2>📊 ROLLUP — Avg Departure Delay by Airline & Month</h2>
+<table>
+    <tr><th>Airline</th><th>Month</th><th>Avg Delay (min)</th></tr>
+    {% for row in rollup_data %}
+    <tr>
+        <td>{{ row.0|default:"GRAND TOTAL" }}</td>
+        <td>{{ row.1|default:"ALL" }}</td>
+        <td>{{ row.2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>🔪 SLICE — Cancelled Flights by Airline</h2>
+<table>
+    <tr><th>Airline</th><th>Total Cancelled</th></tr>
+    {% for row in cancelled_data %}
+    <tr><td>{{ row.0 }}</td><td>{{ row.1 }}</td></tr>
+    {% endfor %}
+</table>
+
+<h2>🔍 DRILL DOWN — Flights by Airline → Month</h2>
+<table>
+    <tr><th>Airline</th><th>Month</th><th>Total Flights</th></tr>
+    {% for row in drilldown_data %}
+    <tr>
+        <td>{{ row.0 }}</td>
+        <td>{{ row.1|default:"ALL" }}</td>
+        <td>{{ row.2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>🎲 DICE — Avg Arrival Delay by Airline & State</h2>
+<table>
+    <tr><th>Airline</th><th>State</th><th>Avg Arrival Delay (min)</th></tr>
+    {% for row in dice_data %}
+    <tr><td>{{ row.0 }}</td><td>{{ row.1 }}</td><td>{{ row.2 }}</td></tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
